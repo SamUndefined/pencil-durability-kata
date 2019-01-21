@@ -1,3 +1,6 @@
+import static java.lang.Character.isUpperCase;
+
+
 public class Pencil {
     private int initialDurability;
 
@@ -18,9 +21,15 @@ public class Pencil {
 
             editingPaper.append(letter);
 
-            this.initialDurability -= 1;
+            decrementDurability(letter);
         }
 
         return editingPaper.toString();
+    }
+
+    public void decrementDurability(char letter) {
+        int decrementAmount = isUpperCase(letter) ? 2 : 1;
+
+        this.initialDurability -= decrementAmount;
     }
 }
