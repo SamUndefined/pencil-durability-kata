@@ -1,20 +1,28 @@
+import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
 
 
 public class PencilTest {
+    private Pencil pencil;
+    private String blankPaper;
+
+    @Before
+    public void setUp() {
+        this.pencil = new Pencil(50);
+        this.blankPaper = "";
+    }
+
     @Test
     public void pencilShouldWriteHelloWhenPassedHello() {
-        Pencil pencil = new Pencil();
-        String paper = pencil.write("Hello", "");
+        String paper = pencil.write("Hello", blankPaper);
 
         assertEquals("Hello", paper);
     }
 
     @Test
     public void pencilShouldAppendNewTextToExistingText() {
-        Pencil pencil = new Pencil();
-        String paper = pencil.write("Hello", "");
+        String paper = pencil.write("Hello", blankPaper);
         String editedPaper = pencil.write(" World!", paper);
 
         assertEquals("Hello World!", editedPaper);
