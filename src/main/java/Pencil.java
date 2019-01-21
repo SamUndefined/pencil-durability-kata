@@ -43,6 +43,10 @@ public class Pencil {
     }
 
     public void sharpen() {
+        if (currentLength < 1) {
+            return;
+        }
+
         currentDurability = initialDurability;
         currentLength -= 1;
     }

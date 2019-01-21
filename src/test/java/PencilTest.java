@@ -69,4 +69,13 @@ public class PencilTest {
 
         assertEquals(49, pencil.getCurrentLength());
     }
+
+    @Test
+    public void pencilCannotBeSharpenedOnceItIsOutOfLength() {
+        Pencil pencil = new Pencil(1, 0);
+        pencil.write("blah", blankPaper);
+        pencil.sharpen();
+
+        assertTrue(pencil.isDull());
+    }
 }
