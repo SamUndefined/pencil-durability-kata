@@ -27,4 +27,12 @@ public class PencilTest {
 
         assertEquals("Hello World!", editedPaper);
     }
+
+    @Test
+    public void pencilCanOnlyWriteAsLongAsItIsSharp() {
+        Pencil pencil = new Pencil(3);
+        String paper = pencil.write("word", blankPaper);
+
+        assertEquals("wor ", paper);
+    }
 }
