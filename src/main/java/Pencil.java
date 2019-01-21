@@ -1,5 +1,5 @@
 public class Pencil {
-    public String write(String input) {
-        return input;
+    public String write(String input, String paper) {
+        return paper + input;
     }
 }
