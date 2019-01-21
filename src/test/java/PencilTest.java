@@ -1,7 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertTrue;
+
+import static junit.framework.TestCase.*;
 
 
 public class PencilTest {
@@ -11,8 +11,8 @@ public class PencilTest {
 
     @Before
     public void setUp() {
-        this.pencil = new Pencil(50);
-        this.fourDurabilityPencil = new Pencil(4);
+        this.pencil = new Pencil(50, 50);
+        this.fourDurabilityPencil = new Pencil(4, 50);
         this.blankPaper = "";
     }
 
@@ -61,5 +61,12 @@ public class PencilTest {
         fourDurabilityPencil.sharpen();
 
         assertEquals(4, fourDurabilityPencil.getCurrentDurability());
+    }
+
+    @Test
+    public void pencilLosesLengthAsItIsSharpened() {
+        pencil.sharpen();
+
+        assertEquals(49, pencil.getCurrentLength());
     }
 }

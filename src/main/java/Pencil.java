@@ -5,14 +5,20 @@ import static java.lang.Character.isWhitespace;
 public class Pencil {
     private final int initialDurability;
     private int currentDurability;
+    private int currentLength;
 
-    public Pencil(int initialDurability) {
+    public Pencil(int initialDurability, int initialLength) {
         this.initialDurability = initialDurability;
         this.currentDurability = initialDurability;
+        this.currentLength = initialLength;
     }
 
     public int getCurrentDurability() {
         return currentDurability;
+    }
+
+    public int getCurrentLength() {
+        return currentLength;
     }
 
     public boolean isDull() {
@@ -38,6 +44,7 @@ public class Pencil {
 
     public void sharpen() {
         currentDurability = initialDurability;
+        currentLength -= 1;
     }
 
     private void decrementDurability(char letter) {
