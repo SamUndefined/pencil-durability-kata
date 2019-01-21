@@ -1,4 +1,5 @@
 import static java.lang.Character.isUpperCase;
+import static java.lang.Character.isWhitespace;
 
 
 public class Pencil {
@@ -28,6 +29,10 @@ public class Pencil {
     }
 
     public void decrementDurability(char letter) {
+        if (isWhitespace(letter)) {
+            return;
+        }
+
         int decrementAmount = isUpperCase(letter) ? 2 : 1;
 
         this.initialDurability -= decrementAmount;

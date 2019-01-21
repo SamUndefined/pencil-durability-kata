@@ -43,4 +43,12 @@ public class PencilTest {
 
         assertEquals("HA  ", paper);
     }
+
+    @Test
+    public void pencilSharpnessShouldNotDecreaseForBlankCharacters() {
+        Pencil pencil = new Pencil(4);
+        String paper = pencil.write("  \nFour  ", blankPaper);
+
+        assertEquals("  \nFou   ", paper);
+    }
 }
