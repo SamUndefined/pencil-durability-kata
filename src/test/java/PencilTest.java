@@ -5,11 +5,13 @@ import static junit.framework.TestCase.assertEquals;
 
 public class PencilTest {
     private Pencil pencil;
+    private Pencil fourDurabilityPencil;
     private String blankPaper;
 
     @Before
     public void setUp() {
         this.pencil = new Pencil(50);
+        this.fourDurabilityPencil = new Pencil(4);
         this.blankPaper = "";
     }
 
@@ -30,24 +32,21 @@ public class PencilTest {
 
     @Test
     public void pencilCanOnlyWriteAsLongAsItIsSharp() {
-        Pencil pencil = new Pencil(3);
-        String paper = pencil.write("word", blankPaper);
+        String paper = fourDurabilityPencil.write("words", blankPaper);
 
-        assertEquals("wor ", paper);
+        assertEquals("word ", paper);
     }
 
     @Test
     public void pencilSharpnessShouldDecreaseMoreForCapitalLetters() {
-        Pencil pencil = new Pencil(4);
-        String paper = pencil.write("HALF", blankPaper);
+        String paper = fourDurabilityPencil.write("HALF", blankPaper);
 
         assertEquals("HA  ", paper);
     }
 
     @Test
     public void pencilSharpnessShouldNotDecreaseForBlankCharacters() {
-        Pencil pencil = new Pencil(4);
-        String paper = pencil.write("  \nFour  ", blankPaper);
+        String paper = fourDurabilityPencil.write("  \nFour  ", blankPaper);
 
         assertEquals("  \nFou   ", paper);
     }
