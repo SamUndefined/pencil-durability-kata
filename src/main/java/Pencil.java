@@ -3,19 +3,27 @@ import static java.lang.Character.isWhitespace;
 
 
 public class Pencil {
-    private int initialDurability;
+    private final int initialDurability;
+    private int currentDurability;
 
     public Pencil(int initialDurability) {
         this.initialDurability = initialDurability;
+        this.currentDurability = initialDurability;
+    }
+
+    public int getCurrentDurability() {
+        return currentDurability;
+    }
+
+    public boolean isDull() {
+        return currentDurability < 1;
     }
 
     public String write(String input, String paper) {
         StringBuilder editingPaper = new StringBuilder(paper);
 
         for (char letter : input.toCharArray()) {
-            boolean dull = initialDurability == 0;
-
-            if (dull) {
+            if (isDull()) {
                 editingPaper.append(' ');
                 continue;
             }
@@ -28,13 +36,17 @@ public class Pencil {
         return editingPaper.toString();
     }
 
-    public void decrementDurability(char letter) {
+    public void sharpen() {
+        currentDurability = initialDurability;
+    }
+
+    private void decrementDurability(char letter) {
         if (isWhitespace(letter)) {
             return;
         }
 
         int decrementAmount = isUpperCase(letter) ? 2 : 1;
 
-        this.initialDurability -= decrementAmount;
+        currentDurability -= decrementAmount;
     }
 }

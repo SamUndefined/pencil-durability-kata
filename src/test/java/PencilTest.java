@@ -1,6 +1,7 @@
 import org.junit.Before;
 import org.junit.Test;
 import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertTrue;
 
 
 public class PencilTest {
@@ -49,5 +50,16 @@ public class PencilTest {
         String paper = fourDurabilityPencil.write("  \nFour  ", blankPaper);
 
         assertEquals("  \nFou   ", paper);
+    }
+
+    @Test
+    public void pencilShouldRegainDurabilityWhenSharpened() {
+        fourDurabilityPencil.write("Dull", blankPaper);
+
+        assertTrue(fourDurabilityPencil.isDull());
+
+        fourDurabilityPencil.sharpen();
+
+        assertEquals(4, fourDurabilityPencil.getCurrentDurability());
     }
 }
