@@ -78,4 +78,12 @@ public class PencilTest {
 
         assertTrue(pencil.isDull());
     }
+
+    @Test
+    public void pencilErasesTheTextItIsGivenToErase() {
+        String paper = pencil.write("Word are not.", blankPaper);
+        String editedPaper = pencil.erase("Word", paper);
+
+        assertEquals("     are not.", editedPaper);
+    }
 }

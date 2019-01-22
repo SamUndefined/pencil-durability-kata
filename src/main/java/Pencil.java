@@ -51,6 +51,12 @@ public class Pencil {
         currentLength -= 1;
     }
 
+    public String erase(String target, String paper) {
+        String replacement = " ".repeat(target.length());
+
+        return paper.replace(target, replacement);
+    }
+
     private void decrementDurability(char letter) {
         if (isWhitespace(letter)) {
             return;
