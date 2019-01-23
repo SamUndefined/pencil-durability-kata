@@ -86,4 +86,12 @@ public class PencilTest {
 
         assertEquals("     are not.", editedPaper);
     }
+
+    @Test
+    public void pencilErasesTheLastOccurrenceOfTheTextItIsGivenToErase() {
+        String paper = pencil.write("Hear ye, hear ye.", blankPaper);
+        String editedPaper = pencil.erase("ye", paper);
+
+        assertEquals("Hear ye, hear   .", editedPaper);
+    }
 }

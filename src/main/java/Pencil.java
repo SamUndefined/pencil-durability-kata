@@ -52,9 +52,20 @@ public class Pencil {
     }
 
     public String erase(String target, String paper) {
-        String replacement = " ".repeat(target.length());
+        int targetStartIndex = paper.lastIndexOf(target);
 
-        return paper.replace(target, replacement);
+        if (targetStartIndex == -1) {
+            return paper;
+        }
+
+        int targetLength = target.length();
+        int targetEndIndex = targetStartIndex + targetLength;
+        String emptySpace = " ".repeat(targetLength);
+        StringBuilder editablePaper = new StringBuilder(paper);
+
+        return editablePaper
+                .replace(targetStartIndex, targetEndIndex, emptySpace)
+                .toString();
     }
 
     private void decrementDurability(char letter) {
