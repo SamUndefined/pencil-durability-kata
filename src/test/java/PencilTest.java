@@ -81,7 +81,7 @@ public class PencilTest {
 
     @Test
     public void pencilErasesTheTextItIsGivenToErase() {
-        String paper = pencil.write("Word are not.", blankPaper);
+        String paper = "Word are not.";
         String editedPaper = pencil.erase("Word", paper);
 
         assertEquals("     are not.", editedPaper);
@@ -89,7 +89,7 @@ public class PencilTest {
 
     @Test
     public void pencilErasesTheLastOccurrenceOfTheTextItIsGivenToErase() {
-        String paper = pencil.write("Hear ye, hear ye.", blankPaper);
+        String paper = "Hear ye, hear ye.";
         String editedPaper = pencil.erase("ye", paper);
 
         assertEquals("Hear ye, hear   .", editedPaper);
