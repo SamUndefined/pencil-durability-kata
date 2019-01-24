@@ -6,11 +6,13 @@ public class Pencil {
     private final int initialDurability;
     private int currentDurability;
     private int currentLength;
+    private int currentEraserDurability;
 
-    public Pencil(int initialDurability, int initialLength) {
+    public Pencil(int initialDurability, int initialLength, int initialEraserDurability) {
         this.initialDurability = initialDurability;
         this.currentDurability = initialDurability;
         this.currentLength = initialLength;
+        this.currentEraserDurability = initialEraserDurability;
     }
 
     public int getCurrentDurability() {
@@ -53,18 +55,24 @@ public class Pencil {
 
     public String erase(String target, String paper) {
         int targetStartIndex = paper.lastIndexOf(target);
+        boolean cannotErase = currentEraserDurability < 1 || targetStartIndex == -1;
 
-        if (targetStartIndex == -1) {
+        if (cannotErase) {
             return paper;
         }
 
         int targetLength = target.length();
+        boolean canEraseFullText = currentEraserDurability >= targetLength;
         int targetEndIndex = targetStartIndex + targetLength;
-        String emptySpace = " ".repeat(targetLength);
-        StringBuilder editablePaper = new StringBuilder(paper);
+        int numCharactersErased = canEraseFullText ? targetLength : currentEraserDurability;
+        int numCharactersNotErased = targetLength - currentEraserDurability;
+        int eraserStartIndex = canEraseFullText ? targetStartIndex : targetStartIndex + numCharactersNotErased;
+        String erasedText = " ".repeat(numCharactersErased);
 
-        return editablePaper
-                .replace(targetStartIndex, targetEndIndex, emptySpace)
+        decrementEraserDurability(targetLength);
+
+        return new StringBuilder(paper)
+                .replace(eraserStartIndex, targetEndIndex, erasedText)
                 .toString();
     }
 
@@ -76,5 +84,9 @@ public class Pencil {
         int decrementAmount = isUpperCase(letter) ? 2 : 1;
 
         currentDurability -= decrementAmount;
+    }
+
+    private void decrementEraserDurability(int amount) {
+        currentEraserDurability -= amount;
     }
 }

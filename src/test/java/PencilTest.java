@@ -11,8 +11,8 @@ public class PencilTest {
 
     @Before
     public void setUp() {
-        this.pencil = new Pencil(50, 50);
-        this.fourDurabilityPencil = new Pencil(4, 50);
+        this.pencil = new Pencil(50, 50, 50);
+        this.fourDurabilityPencil = new Pencil(4, 50, 50);
         this.blankPaper = "";
     }
 
@@ -72,7 +72,7 @@ public class PencilTest {
 
     @Test
     public void pencilCannotBeSharpenedOnceItIsOutOfLength() {
-        Pencil pencil = new Pencil(1, 0);
+        Pencil pencil = new Pencil(1, 0, 50);
         pencil.write("blah", blankPaper);
         pencil.sharpen();
 
@@ -93,5 +93,14 @@ public class PencilTest {
         String editedPaper = pencil.erase("ye", paper);
 
         assertEquals("Hear ye, hear   .", editedPaper);
+    }
+
+    @Test
+    public void eraserWillStopErasingOnceDegraded() {
+        Pencil pencil = new Pencil(50, 50, 4);
+        String paper = "Some things to erase..";
+        String editedPaper = pencil.erase("erase", paper);
+
+        assertEquals("Some things to e    ..", editedPaper);
     }
 }
