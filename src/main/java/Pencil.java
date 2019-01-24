@@ -37,7 +37,6 @@ public class Pencil {
             }
 
             editingPaper.append(letter);
-
             decrementDurability(letter);
         }
 
