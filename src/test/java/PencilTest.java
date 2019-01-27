@@ -103,4 +103,13 @@ public class PencilTest {
 
         assertEquals("Some things to e    ..", editedPaper);
     }
+
+    @Test
+    public void pencilShouldBeAbleToEditErasedText() {
+        String paper = "An apple a day keeps the doctor away";
+        String editedPaper = pencil.erase("apple", paper);
+        String finishedPaper = pencil.edit("onion", editedPaper);
+
+        assertEquals("An onion a day keeps the doctor away", finishedPaper);
+    }
 }

@@ -1,5 +1,4 @@
-import static java.lang.Character.isUpperCase;
-import static java.lang.Character.isWhitespace;
+import static java.lang.Character.*;
 
 
 public class Pencil {
@@ -7,6 +6,7 @@ public class Pencil {
     private int currentDurability;
     private int currentLength;
     private int currentEraserDurability;
+    private Integer lastEraseIndex;
 
     public Pencil(int initialDurability, int initialLength, int initialEraserDurability) {
         this.initialDurability = initialDurability;
@@ -68,11 +68,26 @@ public class Pencil {
         int eraserStartIndex = canEraseFullText ? targetStartIndex : targetStartIndex + numCharactersNotErased;
         String erasedText = " ".repeat(numCharactersErased);
 
+        lastEraseIndex = eraserStartIndex;
         decrementEraserDurability(targetLength);
 
         return new StringBuilder(paper)
                 .replace(eraserStartIndex, targetEndIndex, erasedText)
                 .toString();
+    }
+
+    public String edit(String text, String paper) {
+        if (lastEraseIndex == null) {
+            return paper;
+        }
+
+        String startOfPaper = paper.substring(0, lastEraseIndex);
+        String startOfPaperEdited = write(text, startOfPaper);
+        String endOfPaper = paper.substring(lastEraseIndex + text.length());
+
+        lastEraseIndex = null;
+
+        return startOfPaperEdited + endOfPaper;
     }
 
     private void decrementDurability(char letter) {
