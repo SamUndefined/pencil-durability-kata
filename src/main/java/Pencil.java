@@ -2,14 +2,15 @@ import static java.lang.Character.*;
 
 
 public class Pencil {
-    private final int initialDurability;
+    private final int INITIAL_DURABILITY;
+
     private int currentDurability;
     private int currentLength;
     private int currentEraserDurability;
     private Integer lastEraseIndex;
 
     public Pencil(int initialDurability, int initialLength, int initialEraserDurability) {
-        this.initialDurability = initialDurability;
+        this.INITIAL_DURABILITY = initialDurability;
         this.currentDurability = initialDurability;
         this.currentLength = initialLength;
         this.currentEraserDurability = initialEraserDurability;
@@ -45,7 +46,7 @@ public class Pencil {
             return;
         }
 
-        currentDurability = initialDurability;
+        currentDurability = INITIAL_DURABILITY;
         currentLength -= 1;
     }
 
