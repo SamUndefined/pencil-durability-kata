@@ -46,8 +46,8 @@ public class Pencil {
             return;
         }
 
-        currentDurability = INITIAL_DURABILITY;
-        currentLength -= 1;
+        resetDurability();
+        decrementLength();
     }
 
     public String erase(String target, String paper) {
@@ -66,8 +66,8 @@ public class Pencil {
         int eraserStartIndex = canEraseFullText ? targetStartIndex : targetStartIndex + numCharactersNotErased;
         String erasedText = " ".repeat(numCharactersErased);
 
-        lastEraseIndex = eraserStartIndex;
         decrementEraserDurability(targetLength);
+        updateLastEraseIndex(eraserStartIndex);
 
         return new StringBuilder(paper)
                 .replace(eraserStartIndex, targetEndIndex, erasedText)
@@ -86,7 +86,7 @@ public class Pencil {
         String actualEdit = buildActualEdit(requestedEdit, partToOverwrite);
         String writtenEdit = write(actualEdit, "");
 
-        lastEraseIndex = null;
+        updateLastEraseIndex(null);
 
         return startOfPaper + writtenEdit + endOfPaper;
     }
@@ -101,8 +101,20 @@ public class Pencil {
         currentDurability -= decrementAmount;
     }
 
+    private void resetDurability() {
+        currentDurability = INITIAL_DURABILITY;
+    }
+
+    private void decrementLength() {
+        currentLength -= 1;
+    }
+
     private void decrementEraserDurability(int amount) {
         currentEraserDurability -= amount;
+    }
+
+    private void updateLastEraseIndex(Integer index) {
+        lastEraseIndex = index;
     }
 
     private String buildActualEdit(String requestedEdit, String partToOverwrite) {
