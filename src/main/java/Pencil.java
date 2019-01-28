@@ -2,22 +2,22 @@ import static java.lang.Character.*;
 
 
 public class Pencil {
-    private final int INITIAL_DURABILITY;
+    private final int INITIAL_SHARPNESS;
 
-    private int currentDurability;
+    private int currentSharpness;
     private int currentLength;
     private int currentEraserDurability;
     private Integer lastEraseIndex;
 
-    public Pencil(int initialDurability, int initialLength, int initialEraserDurability) {
-        this.INITIAL_DURABILITY = initialDurability;
-        this.currentDurability = initialDurability;
+    public Pencil(int initialSharpness, int initialLength, int initialEraserDurability) {
+        this.INITIAL_SHARPNESS = initialSharpness;
+        this.currentSharpness = initialSharpness;
         this.currentLength = initialLength;
         this.currentEraserDurability = initialEraserDurability;
     }
 
-    public int getCurrentDurability() {
-        return currentDurability;
+    public int getCurrentSharpness() {
+        return currentSharpness;
     }
 
     public int getCurrentLength() {
@@ -25,7 +25,7 @@ public class Pencil {
     }
 
     public boolean isDull() {
-        return currentDurability < 1;
+        return currentSharpness < 1;
     }
 
     public String write(String input, String paper) {
@@ -35,7 +35,7 @@ public class Pencil {
             char writtenChar = isDull() ? ' ' : letter;
 
             editingPaper.append(writtenChar);
-            decrementDurability(letter);
+            decrementSharpness(letter);
         }
 
         return editingPaper.toString();
@@ -46,7 +46,7 @@ public class Pencil {
             return;
         }
 
-        resetDurability();
+        resetSharpness();
         decrementLength();
     }
 
@@ -91,18 +91,18 @@ public class Pencil {
         return startOfPaper + writtenEdit + endOfPaper;
     }
 
-    private void decrementDurability(char letter) {
+    private void decrementSharpness(char letter) {
         if (isWhitespace(letter)) {
             return;
         }
 
         int decrementAmount = isUpperCase(letter) ? 2 : 1;
 
-        currentDurability -= decrementAmount;
+        currentSharpness -= decrementAmount;
     }
 
-    private void resetDurability() {
-        currentDurability = INITIAL_DURABILITY;
+    private void resetSharpness() {
+        currentSharpness = INITIAL_SHARPNESS;
     }
 
     private void decrementLength() {

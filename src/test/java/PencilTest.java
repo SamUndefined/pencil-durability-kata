@@ -60,7 +60,7 @@ public class PencilTest {
 
         fourDurabilityPencil.sharpen();
 
-        assertEquals(4, fourDurabilityPencil.getCurrentDurability());
+        assertEquals(4, fourDurabilityPencil.getCurrentSharpness());
     }
 
     @Test
