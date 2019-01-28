@@ -112,4 +112,13 @@ public class PencilTest {
 
         assertEquals("An onion a day keeps the doctor away", finishedPaper);
     }
+
+    @Test
+    public void addingTooManyCharactersDuringAnEditCausesCollisionWithExistingNonWhiteSpaceCharacters() {
+        String paper = "An apple a day keeps the doctor away";
+        String editedPaper = pencil.erase("apple", paper);
+        String finishedPaper = pencil.edit("artichoke", editedPaper);
+
+        assertEquals("An artich@k@ay keeps the doctor away", finishedPaper);
+    }
 }

@@ -76,18 +76,21 @@ public class Pencil {
                 .toString();
     }
 
-    public String edit(String text, String paper) {
+    public String edit(String requestedEdit, String paper) {
         if (lastEraseIndex == null) {
             return paper;
         }
 
+        int requestedEditLength = requestedEdit.length();
         String startOfPaper = paper.substring(0, lastEraseIndex);
-        String startOfPaperEdited = write(text, startOfPaper);
-        String endOfPaper = paper.substring(lastEraseIndex + text.length());
+        String partToOverwrite = paper.substring(lastEraseIndex, lastEraseIndex + requestedEditLength);
+        String endOfPaper = paper.substring(lastEraseIndex + requestedEditLength);
+        String actualEdit = buildActualEdit(requestedEdit, partToOverwrite);
+        String writtenEdit = write(actualEdit, "");
 
         lastEraseIndex = null;
 
-        return startOfPaperEdited + endOfPaper;
+        return startOfPaper + writtenEdit + endOfPaper;
     }
 
     private void decrementDurability(char letter) {
@@ -102,5 +105,21 @@ public class Pencil {
 
     private void decrementEraserDurability(int amount) {
         currentEraserDurability -= amount;
+    }
+
+    private String buildActualEdit(String requestedEdit, String partToOverwrite) {
+        StringBuilder actualEdit = new StringBuilder();
+        char[] requestedChars = requestedEdit.toCharArray();
+        char[] existingChars = partToOverwrite.toCharArray();
+
+        for (int index = 0; index < requestedEdit.length(); index++) {
+            char existingChar = existingChars[index];
+            char requestedChar = requestedChars[index];
+            char actualCharToAdd = isWhitespace(existingChar) ? requestedChar : '@';
+
+            actualEdit.append(actualCharToAdd);
+        }
+
+        return actualEdit.toString();
     }
 }
