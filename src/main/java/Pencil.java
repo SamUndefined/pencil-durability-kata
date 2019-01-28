@@ -31,12 +31,9 @@ public class Pencil {
         StringBuilder editingPaper = new StringBuilder(paper);
 
         for (char letter : input.toCharArray()) {
-            if (isDull()) {
-                editingPaper.append(' ');
-                continue;
-            }
+            char writtenChar = isDull() ? ' ' : letter;
 
-            editingPaper.append(letter);
+            editingPaper.append(writtenChar);
             decrementDurability(letter);
         }
 
