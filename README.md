@@ -1,4 +1,4 @@
-# PencilDurabilityKata
+# Pencil Durability Kata
 **Language:** Java
 
 ### Building
